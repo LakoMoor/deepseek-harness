@@ -342,6 +342,22 @@ describe('healProfilesModuleFallback', () => {
     }
   })
 
+  it('replaces an owned link whose target traverses an invalid archive path', async () => {
+    const anchor = stageInstallation({ 'bundle-a': { patch: '[]\n' } })
+    const home = tmp()
+    await healProfilesModuleFallback({ installAnchor: anchor, home })
+    const fallback = join(home, 'profiles', 'node_modules', 'bundle-a')
+    unlinkSync(fallback)
+    const staleArchive = join(home, 'stale.asar')
+    writeFileSync(staleArchive, '')
+    symlinkSync(join(staleArchive, 'node_modules', 'bundle-a'), fallback, 'junction')
+
+    await healProfilesModuleFallback({ installAnchor: anchor, home })
+
+    expect(realpathSync.native(readlinkSync(fallback)))
+      .toBe(realpathSync.native(join(anchor, '..', 'node_modules', 'bundle-a')))
+  })
+
   it('keeps selected bundle closures profile-local without overriding installation packages', async () => {
     const installationAnchor = stageInstallation({ shared: {} })
     const bundleA = stageInstallation({ shared: {}, '@scope/bundle-only': {} }, 'selected-bundle-a')

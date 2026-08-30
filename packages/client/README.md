@@ -66,6 +66,7 @@ The kernel packages boot and serve the page; the UI feature packages present it.
 | [`ui-settings/`](ui-settings/README.md) | Hosts the settings interface and its extension areas | — |
 | [`ui-settings-general/`](ui-settings-general/README.md) | Provides the general settings section | — |
 | [`ui-settings-models/`](ui-settings-models/README.md) | Provides model-provider configuration and DeepSeek onboarding | — |
+| [`ui-local-model-desktop/`](ui-local-model-desktop/README.md) | Adds Electron local-model onboarding and Models settings controls | — |
 | [`ui-settings-plugin-inventory/`](ui-settings-plugin-inventory/README.md) | Contributes the read-only Host Loader inventory tab to Plugins settings | — |
 | [`ui-deliverables/`](ui-deliverables/README.md) | Produces the produced-files turn tail and clickable final-response file references | — |
 | [`ui-message-feedback/`](ui-message-feedback/README.md) | Contributes per-message feedback controls to the assistant-message action strip | — |

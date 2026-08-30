@@ -8,6 +8,29 @@ It is built on an **everything-is-a-plugin** architecture and powered by [Cordis
 
 Documentation: [https://deepseek-harness.github.io/deepseek-harness/](https://deepseek-harness.github.io/deepseek-harness/)
 
+## Desktop edition
+
+The desktop edition maintained by [LakoMoor](https://github.com/LakoMoor) packages the Harness as an installable macOS, Windows, and Linux application while preserving the complete Web UI and plugin system.
+
+<p align="center"><img src="apps/desktop/assets/screenshots/desktop-home.png" alt="DeepSeek Harness Desktop main window" width="960"></p>
+
+### Desktop highlights
+
+- Run with a native window, custom title bar, application icon, tray controls, and background backend lifecycle.
+- Download the recommended local model during first-run setup or choose any compatible GGUF file later in Settings.
+- Keep exploring the application while a model downloads; progress remains visible in the title bar and Models settings.
+- Run local conversations through `node-llama-cpp` with Metal, CUDA, Vulkan, or CPU support selected for the platform.
+- Build native x64 and ARM64 installers for macOS, Windows, and Linux through GitHub Actions.
+
+<table>
+  <tr>
+    <td><img src="apps/desktop/assets/screenshots/desktop-first-run.png" alt="First-run local model setup"></td>
+    <td><img src="apps/desktop/assets/screenshots/desktop-local-model-settings.png" alt="Local model settings"></td>
+  </tr>
+</table>
+
+See the [desktop guide](apps/desktop/README.md) for development, packaging, and release instructions.
+
 ## Developer preview
 
 DeepSeek Harness is in _developer preview_ and iterating rapidly. **THERE WILL BE COMPATIBILITY-BREAKING CHANGES.**
@@ -31,7 +54,7 @@ The command starts the Web UI at `http://127.0.0.1:3080` by default and opens it
 To run from a repository checkout:
 
 ```sh
-git clone https://github.com/deepseek-ai/deepseek-harness.git
+git clone https://github.com/LakoMoor/deepseek-harness.git
 cd deepseek-harness
 pnpm install
 pnpm run build

@@ -1,0 +1,14 @@
+- insert:
+    - id: ui-local-model-desktop
+      name: ../node_modules/@deepseek-ai/dsh-client-ui-local-model-desktop/lib/index.js
+      config:
+        workspacePath: !!js process.env.DSH_DESKTOP_WORKSPACE_PATH
+    - id: llm-local
+      name: ../node_modules/@deepseek-ai/dsh-llm-local/lib/index.js
+      config:
+        modelPath: !!js process.env.DSH_DESKTOP_LOCAL_MODEL_PATH || undefined
+        provider: local
+        model: local-gguf
+        displayName: Local llama.cpp
+        contextWindow: 32768
+        maxTokens: 4096

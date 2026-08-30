@@ -282,7 +282,14 @@ function canonicalLinkPath(path: string): string | undefined {
 /** Return whether a symlink or junction points at the same path as `target`. */
 function symlinkPointsTo(link: string, target: string): boolean {
   const actual = resolve(dirname(link), readlinkSync(link))
-  const canonicalActual = canonicalLinkPath(actual)
+  let canonicalActual
+  try {
+    canonicalActual = canonicalLinkPath(actual)
+  } catch {
+    // A stale owned link can point through an invalid virtual archive or
+    // another unusable parent. It cannot match the current installation.
+    return false
+  }
   const canonicalTarget = canonicalLinkPath(resolve(target))
   return canonicalActual !== undefined && canonicalActual === canonicalTarget
 }

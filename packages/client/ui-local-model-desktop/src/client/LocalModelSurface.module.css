@@ -1,0 +1,143 @@
+.card {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
+  padding: 16px;
+  border: 1px solid var(--dsw-alias-border-l2);
+  border-radius: 12px;
+  color: var(--dsw-alias-label-primary);
+}
+
+.title,
+.dialogTitle {
+  margin: 0;
+  color: var(--dsw-alias-label-primary);
+  font-weight: 500;
+}
+
+.title {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.description,
+.dialogDescription,
+.hint,
+.status,
+.status p,
+.error,
+.success {
+  margin: 0;
+}
+
+.description,
+.dialogDescription,
+.status {
+  color: var(--dsw-alias-label-secondary);
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.hint {
+  color: var(--dsw-alias-label-tertiary);
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.status {
+  overflow-wrap: anywhere;
+}
+
+.error {
+  color: var(--dsw-alias-state-error-primary);
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.success {
+  color: var(--dsw-alias-state-success-primary);
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.downloadStatus {
+  display: grid;
+  gap: 6px;
+  color: var(--dsw-alias-label-secondary);
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.downloadStatus progress {
+  width: 100%;
+  height: 6px;
+  overflow: hidden;
+  border: 0;
+  border-radius: 999px;
+  color: var(--dsw-alias-brand-primary);
+  background: var(--dsw-alias-bg-layer-3);
+}
+
+.downloadStatus progress::-webkit-progress-bar {
+  background: var(--dsw-alias-bg-layer-3);
+  border-radius: 999px;
+}
+
+.downloadStatus progress::-webkit-progress-value {
+  background: currentcolor;
+  border-radius: 999px;
+}
+
+.downloadStatus progress:not([value])::-webkit-progress-bar {
+  background: linear-gradient(
+    90deg,
+    var(--dsw-alias-bg-layer-3) 20%,
+    var(--dsw-alias-brand-primary) 50%,
+    var(--dsw-alias-bg-layer-3) 80%
+  );
+  background-size: 200% 100%;
+  animation: download-indeterminate 1.4s linear infinite;
+}
+
+@keyframes download-indeterminate {
+  from { background-position: 100% 0; }
+  to { background-position: -100% 0; }
+}
+
+.dialog {
+  width: min(620px, 100%);
+  padding: 0;
+}
+
+.dialogContent {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 28px;
+}
+
+.dialogTitle {
+  font-size: 20px;
+  line-height: 28px;
+}
+
+@media (max-width: 560px) {
+  .dialogContent {
+    padding: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .downloadStatus progress:not([value])::-webkit-progress-bar {
+    animation: none;
+  }
+}

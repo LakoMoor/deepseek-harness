@@ -8,6 +8,29 @@ DeepSeek Harness（`dsh`）是由 [DeepSeek AI](https://deepseek.com) 开发的�
 
 文档：[https://deepseek-harness.github.io/deepseek-harness/](https://deepseek-harness.github.io/deepseek-harness/)
 
+## 桌面版
+
+由 [LakoMoor](https://github.com/LakoMoor) 维护的桌面版将 Harness 打包为可安装的 macOS、Windows 和 Linux 应用，同时保留完整的 Web UI 与插件系统。
+
+<p align="center"><img src="apps/desktop/assets/screenshots/desktop-home.png" alt="DeepSeek Harness Desktop 主窗口" width="960"></p>
+
+### 桌面版功能
+
+- 通过原生窗口、自定义 title bar、应用图标、托盘控制和后台 backend lifecycle 运行。
+- 在首次启动设置中下载推荐的本地模型，或之后在 Settings 中选择任意兼容的 GGUF 文件。
+- 模型下载期间可继续浏览应用；title bar 与 Models 设置中会持续显示进度。
+- 通过 `node-llama-cpp` 运行本地对话，并按平台选择 Metal、CUDA、Vulkan 或 CPU 支持。
+- 通过 GitHub Actions 为 macOS、Windows 和 Linux 构建原生 x64 与 ARM64 安装包。
+
+<table>
+  <tr>
+    <td><img src="apps/desktop/assets/screenshots/desktop-first-run.png" alt="首次启动本地模型设置"></td>
+    <td><img src="apps/desktop/assets/screenshots/desktop-local-model-settings.png" alt="本地模型设置"></td>
+  </tr>
+</table>
+
+开发、打包与发布说明参见[桌面版指南](apps/desktop/README.zh.md)。
+
 ## 开发者预览
 
 DeepSeek Harness 处于 _开发者预览_ 阶段，正在快速迭代。**未来将出现破坏兼容性的变更。**
@@ -35,7 +58,7 @@ npx @deepseek-ai/dsh web
 如需从仓库源码运行：
 
 ```sh
-git clone https://github.com/deepseek-ai/deepseek-harness.git
+git clone https://github.com/LakoMoor/deepseek-harness.git
 cd deepseek-harness
 pnpm install
 pnpm run build

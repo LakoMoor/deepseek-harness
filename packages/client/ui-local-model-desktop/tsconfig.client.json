@@ -1,0 +1,28 @@
+{
+  "extends": "../../../tsconfig.base.client.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "lib/types",
+    "tsBuildInfoFile": "lib/tsconfig.client.tsbuildinfo"
+  },
+  "files": [
+    "src/client/DesktopTitleBar.tsx",
+    "src/client/LocalModelOnboarding.tsx",
+    "src/client/LocalModelSettingsCard.tsx",
+    "src/client/bridge.ts",
+    "src/client/index.ts",
+    "src/client/locales.ts",
+    "src/client/useLocalModel.ts",
+    "src/css-modules.d.ts"
+  ],
+  "references": [
+    { "path": "../../../vendor/cordis" },
+    { "path": "../locale" },
+    { "path": "../ui-layout" },
+    { "path": "../ui-primitives" },
+    { "path": "../ui-renderer" },
+    { "path": "../ui-settings" },
+    { "path": "../ui-settings-models" },
+    { "path": "../ui-slots" }
+  ]
+}

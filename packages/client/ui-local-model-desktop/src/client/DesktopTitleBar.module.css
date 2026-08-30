@@ -1,0 +1,111 @@
+:global(html.dsh-desktop-shell #root) {
+  box-sizing: border-box;
+  padding-top: 40px;
+}
+
+.titleBar {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 100;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 14px;
+  color: var(--dsw-alias-label-secondary);
+  background: color-mix(in srgb, var(--dsw-alias-bg-base) 94%, transparent);
+  border-bottom: 1px solid var(--dsw-alias-border-l1);
+  backdrop-filter: blur(18px);
+  -webkit-app-region: drag;
+  user-select: none;
+}
+
+.mac {
+  padding-left: 78px;
+}
+
+.windowControls {
+  padding-right: 148px;
+}
+
+.brand {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  max-width: calc(100% - 420px);
+  min-width: 0;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  white-space: nowrap;
+  transform: translate(-50%, -50%);
+}
+
+.brand span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.download {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+  font-size: 11px;
+  line-height: 16px;
+  white-space: nowrap;
+  -webkit-app-region: no-drag;
+}
+
+.progress {
+  width: 108px;
+  height: 4px;
+  overflow: hidden;
+  border: 0;
+  border-radius: 999px;
+  color: var(--dsw-alias-brand-primary);
+  background: var(--dsw-alias-bg-layer-3);
+}
+
+.progress::-webkit-progress-bar {
+  background: var(--dsw-alias-bg-layer-3);
+  border-radius: 999px;
+}
+
+.progress::-webkit-progress-value {
+  background: currentcolor;
+  border-radius: 999px;
+}
+
+.progress:not([value])::-webkit-progress-bar {
+  background: linear-gradient(
+    90deg,
+    var(--dsw-alias-bg-layer-3) 20%,
+    var(--dsw-alias-brand-primary) 50%,
+    var(--dsw-alias-bg-layer-3) 80%
+  );
+  background-size: 200% 100%;
+  animation: download-indeterminate 1.4s linear infinite;
+}
+
+@keyframes download-indeterminate {
+  from { background-position: 100% 0; }
+  to { background-position: -100% 0; }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .titleBar {
+    background: var(--dsw-alias-bg-base);
+    backdrop-filter: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .progress:not([value])::-webkit-progress-bar {
+    animation: none;
+  }
+}

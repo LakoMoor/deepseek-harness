@@ -451,6 +451,22 @@ export interface Config {
 
 来源：[`packages/client/hmr/src/index.ts:31`](../packages/client/hmr/src/index.ts)
 
+<a id="deepseek-aidsh-client-ui-local-model-desktop"></a>
+
+## `@deepseek-ai/dsh-client-ui-local-model-desktop`
+
+需要：`workspaceRegistry`
+
+```ts config-catalog
+/** Desktop-owned startup configuration. */
+export interface Config {
+  /** Existing directory registered as the initial desktop Workspace. */
+  readonly workspacePath: string
+}
+```
+
+来源：[`packages/client/ui-local-model-desktop/src/index.ts:8`](../packages/client/ui-local-model-desktop/src/index.ts)
+
 <a id="deepseek-aidsh-code-runtime-worker-thread"></a>
 
 ## `@deepseek-ai/dsh-code-runtime-worker-thread`
@@ -1041,6 +1057,32 @@ export interface DeepSeekCatalogModel {
 依赖：[`ModelModality`](../packages/llm/llm/src/index.ts) · [`RetryPolicyConfig`](../packages/llm/llm/src/index.ts)
 
 来源：[`packages/llm/llm-deepseek/src/index.ts:125`](../packages/llm/llm-deepseek/src/index.ts)
+
+<a id="deepseek-aidsh-llm-local"></a>
+
+## `@deepseek-ai/dsh-llm-local`
+
+需要：`llm`
+
+```ts config-catalog
+/** Configuration for one local GGUF route. */
+export interface Config {
+  /** Absolute GGUF path; omission leaves the route visible but unavailable. */
+  modelPath?: string
+  /** Provider route exposed to model selectors. */
+  provider: string
+  /** Model id exposed to model selectors. */
+  model: string
+  /** Human-readable provider name. */
+  displayName: string
+  /** Maximum context allocated for each request. */
+  contextWindow: number
+  /** Default response-token limit. */
+  maxTokens: number
+}
+```
+
+来源：[`packages/llm/llm-local/src/index.ts:19`](../packages/llm/llm-local/src/index.ts)
 
 <a id="deepseek-aidsh-llm-pi-ai"></a>
 

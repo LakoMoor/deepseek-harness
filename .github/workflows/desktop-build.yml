@@ -1,0 +1,90 @@
+name: Desktop builds
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'desktop-v*'
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: ${{ matrix.name }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: macOS arm64
+            artifact: macos-arm64
+            os: macos-15
+            script: desktop:dist:mac
+          - name: macOS x64
+            artifact: macos-x64
+            os: macos-15-intel
+            script: desktop:dist:mac
+          - name: Windows x64
+            artifact: windows-x64
+            os: windows-latest
+            script: desktop:dist:win
+          - name: Windows arm64
+            artifact: windows-arm64
+            os: windows-11-arm
+            script: desktop:dist:win
+          - name: Linux x64
+            artifact: linux-x64
+            os: ubuntu-latest
+            script: desktop:dist:linux
+          - name: Linux arm64
+            artifact: linux-arm64
+            os: ubuntu-24.04-arm
+            script: desktop:dist:linux
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.7.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run ${{ matrix.script }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: deepseek-harness-${{ matrix.artifact }}
+          path: |
+            apps/desktop/release/*.AppImage
+            apps/desktop/release/*.blockmap
+            apps/desktop/release/*.dmg
+            apps/desktop/release/*.exe
+            apps/desktop/release/*.zip
+          if-no-files-found: error
+          retention-days: 14
+
+  release:
+    name: Publish desktop release
+    if: startsWith(github.ref, 'refs/tags/desktop-v')
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: deepseek-harness-*
+          path: release-assets
+          merge-multiple: true
+      - uses: softprops/action-gh-release@v3
+        with:
+          name: DeepSeek Harness Desktop ${{ github.ref_name }}
+          generate_release_notes: true
+          prerelease: ${{ contains(github.ref_name, '-') }}
+          files: |
+            release-assets/*.AppImage
+            release-assets/*.blockmap
+            release-assets/*.dmg
+            release-assets/*.exe
+            release-assets/*.zip

@@ -1,0 +1,87 @@
+{
+  "name": "@deepseek-ai/dsh-desktop",
+  "description": "Electron desktop shell for DeepSeek Harness",
+  "version": "0.1.2-alpha.2",
+  "private": true,
+  "type": "module",
+  "main": "src/main.mjs",
+  "author": "LakoMoor",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir --publish never",
+    "dist": "electron-builder --publish never",
+    "dist:linux": "electron-builder --linux AppImage --publish never",
+    "dist:mac": "electron-builder --mac dmg zip --publish never",
+    "dist:win": "electron-builder --win nsis --publish never",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "dependencies": {
+    "@deepseek-ai/dsh": "workspace:^",
+    "@deepseek-ai/dsh-client-ui-local-model-desktop": "workspace:^",
+    "@deepseek-ai/dsh-llm-local": "workspace:^",
+    "@deepseek-ai/dsh-session-title-llm": "workspace:^",
+    "@deepseek-ai/dsh-util-workspace-path": "workspace:^",
+    "dsh-python-runtime-closure": "workspace:*",
+    "node-llama-cpp": "3.19.1",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "yaml": "^2.9.0"
+  },
+  "devDependencies": {
+    "electron": "44.0.0",
+    "electron-builder": "26.15.3"
+  },
+  "build": {
+    "appId": "ai.deepseek.harness.desktop",
+    "productName": "DeepSeek Harness",
+    "asar": false,
+    "icon": "build/icon.png",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "src/**/*",
+      "build/**/*",
+      "package.json",
+      "!node_modules/node-llama-cpp/bins/**/*",
+      "node_modules/node-llama-cpp/bins/${os}-${arch}*/**/*",
+      "!node_modules/node-llama-cpp/llama/localBuilds/**/*",
+      "node_modules/node-llama-cpp/llama/localBuilds/${os}-${arch}*/**/*",
+      "!node_modules/@node-llama-cpp/*/bins/**/*",
+      "node_modules/@node-llama-cpp/${os}-${arch}*/bins/**/*"
+    ],
+    "asarUnpack": [
+      "node_modules/node-llama-cpp/bins",
+      "node_modules/node-llama-cpp/llama/localBuilds",
+      "node_modules/@node-llama-cpp/*"
+    ],
+    "artifactName": "DeepSeek-Harness-${version}-${os}-${arch}.${ext}",
+    "mac": {
+      "category": "public.app-category.developer-tools",
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist",
+      "hardenedRuntime": true,
+      "identity": "-",
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "linux": {
+      "category": "Development",
+      "target": [
+        "AppImage"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}
