@@ -159,6 +159,11 @@
     "desktop:dist:linux": "pnpm run build && pnpm --filter @deepseek-ai/dsh-desktop run dist:linux",
     "desktop:dist:mac": "pnpm run build && pnpm --filter @deepseek-ai/dsh-desktop run dist:mac",
     "desktop:dist:win": "pnpm run build && pnpm --filter @deepseek-ai/dsh-desktop run dist:win",
+    "mobile:start": "pnpm --filter @deepseek-ai/dsh-mobile run start",
+    "mobile:android": "pnpm --filter @deepseek-ai/dsh-mobile run android",
+    "mobile:build:android": "pnpm --filter @deepseek-ai/dsh-mobile run build:android",
+    "mobile:test": "pnpm --filter @deepseek-ai/dsh-mobile run test",
+    "mobile:typecheck": "pnpm --filter @deepseek-ai/dsh-mobile run typecheck",
     "mock:llm": "node --import tsx packages/test-support/llm-mock-server/src/bin.ts",
     "dev:web": "tsx scripts/dev-web.ts --poll",
     "postinstall": "node scripts/install-lefthook.mjs"

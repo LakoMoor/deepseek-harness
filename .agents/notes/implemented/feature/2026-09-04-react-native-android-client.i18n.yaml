@@ -1,0 +1,6 @@
+# Bilingual-pair consistency record (docs/i18n/README.md): the git blob hash of each
+# side as of the last confirmed-consistent state. Both languages carry equal authority;
+# after editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write .agents/notes/implemented/feature/2026-09-04-react-native-android-client.md
+2026-09-04-react-native-android-client.md: 3c63b51ecd6b5ed301fb924ffacb020eaea73809
+2026-09-04-react-native-android-client.zh.md: d4e311accdc46393cedda7d27385f909833aa0a6

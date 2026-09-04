@@ -50,6 +50,8 @@ allowBuilds:
   electron-winstaller: true
   # Selects the reviewed prebuilt llama.cpp binding during desktop installation.
   node-llama-cpp: true
+  # Downloads the reviewed Android llama.cpp native artifacts for the mobile client.
+  llama.rn: true
 
 minimumReleaseAgeExclude:
   # Fresh pi-ai releases carry the model catalog updates that are the whole

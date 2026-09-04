@@ -85,6 +85,13 @@ describe('package payload constraints', () => {
     })).toEqual([])
   })
 
+  it('keeps the platform-distributed mobile application private', () => {
+    expect(checkWorkspaceManifest({
+      dir: 'apps/mobile',
+      manifest: { name: '@deepseek-ai/dsh-mobile', private: true },
+    })).toEqual([])
+  })
+
   it('includes a declared profile patch without a package-name allowlist', () => {
     expect(expectedDshPackageFiles({
       name: '@deepseek-ai/dsh-private-profile',

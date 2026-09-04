@@ -1,0 +1,57 @@
+name: Android mobile build
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'apps/mobile/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - 'pnpm-workspace.yaml'
+      - '.github/workflows/mobile-build.yml'
+  push:
+    branches:
+      - master
+    paths:
+      - 'apps/mobile/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - 'pnpm-workspace.yaml'
+      - '.github/workflows/mobile-build.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Android arm64 and emulator APK
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.7.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: gradle
+      - uses: android-actions/setup-android@v3
+      - name: Install Android build components
+        run: sdkmanager 'platforms;android-37' 'build-tools;37.0.0' 'ndk;27.1.12297006'
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run mobile:typecheck
+      - run: pnpm --filter @deepseek-ai/dsh-mobile test --runInBand
+      - name: Build Android APK
+        working-directory: apps/mobile/android
+        run: ./gradlew assembleDebug --no-daemon -PreactNativeArchitectures=arm64-v8a,x86_64
+      - uses: actions/upload-artifact@v4
+        with:
+          name: deepseek-harness-android-preview
+          path: apps/mobile/android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
+          retention-days: 14

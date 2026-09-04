@@ -1,0 +1,12 @@
+# Android build products and local configuration
+android/.gradle/
+android/.kotlin/
+android/.cxx/
+android/local.properties
+android/app/build/
+android/build/
+
+# Metro and test output
+.metro-health-check*
+coverage/
+*.jsbundle
