@@ -155,7 +155,9 @@ External packages **directly declared** only by repository tooling, test infrast
 | [`@react-native-community/cli`](https://github.com/react-native-community/cli) | MIT |
 | [`@react-native-community/cli-platform-android`](https://github.com/react-native-community/cli) | MIT |
 | [`@react-native/babel-preset`](https://github.com/react/react-native) | MIT |
+| [`@react-native/codegen`](https://github.com/react/react-native) | MIT |
 | [`@react-native/eslint-config`](https://github.com/react/react-native) | MIT |
+| [`@react-native/gradle-plugin`](https://github.com/react/react-native) | MIT |
 | [`@react-native/jest-preset`](https://github.com/react/react-native) | MIT |
 | [`@react-native/metro-config`](https://github.com/react/react-native) | MIT |
 | [`@react-native/typescript-config`](https://github.com/react/react-native) | MIT |
