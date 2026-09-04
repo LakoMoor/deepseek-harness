@@ -12,7 +12,7 @@ The recommended model is about 640 MB. Inference runs through llama.cpp without 
 
 ## Development
 
-Install JDK 17, Android SDK Platform 37, Build Tools 37.0.0, and NDK 27.1.12297006, then run from the repository root:
+Install JDK 17, Android SDK Platform 36, Build Tools 36.0.0, and NDK 27.1.12297006, then run from the repository root:
 
 ```sh
 pnpm install

@@ -12,7 +12,7 @@
 
 ## 开发
 
-安装 JDK 17、Android SDK Platform 37、Build Tools 37.0.0 和 NDK 27.1.12297006，然后从仓库根目录运行：
+安装 JDK 17、Android SDK Platform 36、Build Tools 36.0.0 和 NDK 27.1.12297006，然后从仓库根目录运行：
 
 ```sh
 pnpm install

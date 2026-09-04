@@ -35,14 +35,14 @@ jobs:
         with:
           node-version: 24
           cache: pnpm
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: '17'
           cache: gradle
       - uses: android-actions/setup-android@v3
       - name: Install Android build components
-        run: sdkmanager 'platforms;android-37' 'build-tools;37.0.0' 'ndk;27.1.12297006'
+        run: sdkmanager 'platforms;android-36' 'build-tools;36.0.0' 'ndk;27.1.12297006'
       - run: pnpm install --frozen-lockfile
       - run: pnpm run mobile:typecheck
       - run: pnpm --filter @deepseek-ai/dsh-mobile test --runInBand
