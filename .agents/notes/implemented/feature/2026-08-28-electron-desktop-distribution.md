@@ -34,7 +34,7 @@ The icon source is the repository's official DeepSeek whale vector rendered in w
 
 ## Verification
 
-The desktop package participates in the pnpm workspace and frozen lockfile. Repository scripts build the normal Harness artifacts before development launch or packaging, and the CI matrix rejects an operating-system family when its expected release files are absent.
+The desktop package participates in the pnpm workspace and frozen lockfile but remains outside the npm release family. Repository scripts build the normal Harness artifacts before development launch or packaging, and the CI matrix rejects an operating-system family when its expected release files are absent.
 
 ## Alternatives considered
 

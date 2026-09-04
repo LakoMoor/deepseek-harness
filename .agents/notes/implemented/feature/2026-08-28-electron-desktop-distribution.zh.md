@@ -34,7 +34,7 @@ Icon source 是仓库的官方 DeepSeek whale vector，以白色渲染在产品�
 
 ## Verification
 
-Desktop package 加入 pnpm workspace 和冻结 lockfile。仓库脚本会在开发启动或打包前构建普通 Harness 产物；如果某个操作系统系列没有生成预期 release 文件，CI matrix 会失败。
+Desktop package 加入 pnpm workspace 和冻结 lockfile，但不属于 npm release family。仓库脚本会在开发启动或打包前构建普通 Harness 产物；如果某个操作系统系列没有生成预期 release 文件，CI matrix 会失败。
 
 ## Alternatives considered
 

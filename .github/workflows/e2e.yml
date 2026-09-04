@@ -83,11 +83,11 @@ jobs:
       - name: Prepare bubblewrap (unrestrict userns)
         run: bash scripts/prepare-ci-bubblewrap.sh
 
-      # Guard against a false green: the e2e suites self-skip when the key is
-      # absent, so a missing/misconfigured secret would otherwise pass as
-      # "all skipped". This job only runs on trusted events (the `if:` above
-      # excludes keyless PRs), so the secret MUST be present — fail loudly if not.
+      # The upstream repository requires its real-API secret. A fork may run
+      # the workflow without copying that credential; report the omission and
+      # leave its API-dependent steps skipped until the fork configures a key.
       - name: Preflight (require DEEPSEEK_API_KEY)
+        id: api-key
         env:
           # Repo secret DEEPSEEK_API_KEY_EXTERNAL holds the external-API key;
           # the tests read process.env.DEEPSEEK_API_KEY, so map it across here.
@@ -95,16 +95,23 @@ jobs:
         run: |
           set -euo pipefail
           if [ -z "${DEEPSEEK_API_KEY:-}" ]; then
-            echo "::error::DEEPSEEK_API_KEY is empty. The e2e suite would self-skip and"
-            echo "::error::report a false green. Configure the repo secret DEEPSEEK_API_KEY_EXTERNAL."
-            exit 1
+            if [ "$GITHUB_REPOSITORY" = "deepseek-ai/deepseek-harness" ]; then
+              echo "::error::DEEPSEEK_API_KEY is empty. The e2e suite would self-skip and"
+              echo "::error::report a false green. Configure the repo secret DEEPSEEK_API_KEY_EXTERNAL."
+              exit 1
+            fi
+            echo "available=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::Real-API E2E skipped because this fork has no DEEPSEEK_API_KEY_EXTERNAL secret."
+            exit 0
           fi
+          echo "available=true" >> "$GITHUB_OUTPUT"
           echo "DEEPSEEK_API_KEY present."
 
       # The e2e suites boot the example bins in `lib` mode (DSH_EXAMPLE_MODE=lib):
       # the built artifact under plain Node, resolving plugins through real package
       # exports — the shape a real consumer runs. That requires a prior build.
       - name: Build (lib for the e2e example bins)
+        if: steps.api-key.outputs.available == 'true'
         run: pnpm run build:official
 
       # Real-API end-to-end tests only. The keyless gates (lint/typecheck/
@@ -113,6 +120,7 @@ jobs:
       # DEEPSEEK_BASE_URL is pinned to the external API; the secret is scoped to
       # this step (and preflight) only — never exposed to checkout/setup/install.
       - name: E2E tests (real DeepSeek API)
+        if: steps.api-key.outputs.available == 'true'
         env:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY_EXTERNAL }}
           DEEPSEEK_BASE_URL: https://api.deepseek.com

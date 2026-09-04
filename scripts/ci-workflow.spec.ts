@@ -322,6 +322,22 @@ describe('DeepSeek e2e workflow', () => {
     const step = e2e.steps.filter(isRecord).find(candidate => candidate.name === 'E2E tests (real DeepSeek API)')
     expect(step).toMatchObject({ env: { DSH_E2E_MAX_WORKERS: 4 } })
   })
+
+  it('skips real-API work for forks without weakening the upstream secret requirement', () => {
+    const workflow = loadWorkflow('.github/workflows/e2e.yml')
+    const e2e = workflowJob(workflow, 'e2e')
+    if (!Array.isArray(e2e.steps)) throw new TypeError('DeepSeek e2e workflow must define steps')
+
+    const steps = e2e.steps.filter(isRecord)
+    const preflight = steps.find(step => step.name === 'Preflight (require DEEPSEEK_API_KEY)')
+    const build = steps.find(step => step.name === 'Build (lib for the e2e example bins)')
+    const tests = steps.find(step => step.name === 'E2E tests (real DeepSeek API)')
+    expect(preflight).toMatchObject({ id: 'api-key' })
+    expect(preflight?.run).toContain('deepseek-ai/deepseek-harness')
+    expect(preflight?.run).toContain('available=false')
+    expect(build).toMatchObject({ if: "steps.api-key.outputs.available == 'true'" })
+    expect(tests).toMatchObject({ if: "steps.api-key.outputs.available == 'true'" })
+  })
 })
 
 describe('E2B e2e workflow', () => {
