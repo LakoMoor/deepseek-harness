@@ -5,6 +5,7 @@
   "private": true,
   "type": "module",
   "main": "src/main.mjs",
+  "desktopName": "deepseek-harness",
   "author": "LakoMoor",
   "license": "MIT",
   "scripts": {
@@ -36,7 +37,6 @@
     "appId": "ai.deepseek.harness.desktop",
     "productName": "DeepSeek Harness",
     "executableName": "deepseek-harness",
-    "desktopName": "deepseek-harness",
     "asar": false,
     "icon": "build/icon.png",
     "directories": {

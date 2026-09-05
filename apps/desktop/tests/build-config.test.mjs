@@ -8,6 +8,6 @@ test('uses a filesystem-safe executable and matching Linux desktop identity', as
 
   assert.match(build.executableName, /^[A-Za-z0-9._ -]+$/)
   assert.equal(build.executableName, 'deepseek-harness')
-  assert.equal(build.desktopName, build.executableName)
+  assert.equal(packageJson.desktopName, build.executableName)
   assert.equal(build.linux.syncDesktopName, true)
 })
