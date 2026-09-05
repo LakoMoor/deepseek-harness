@@ -40,6 +40,6 @@ pnpm run desktop:dist:win
 pnpm run desktop:dist:linux
 ```
 
-Artifacts are written under `apps/desktop/release`. macOS produces DMG and ZIP files, Windows produces NSIS installers, and Linux produces AppImages. The local commands build the current machine architecture; the repository workflow builds x64 and ARM64 separately on native runners for all three operating-system families. macOS development artifacts use a valid ad-hoc signature so the application can run locally. A trusted public release must replace the configured ad-hoc identity with a Developer ID identity and complete notarization in the release environment.
+Artifacts are written under `apps/desktop/release`. macOS produces DMG and ZIP files, Windows produces NSIS installers, and Linux produces AppImages with the `deepseek-harness` executable and desktop identity. The local commands build the current machine architecture; the repository workflow builds x64 and ARM64 separately on native runners for all three operating-system families. macOS development artifacts use a valid ad-hoc signature so the application can run locally. A trusted public release must replace the configured ad-hoc identity with a Developer ID identity and complete notarization in the release environment.
 
 Pushing a `desktop-v*` tag runs the native build matrix and attaches every installer to a GitHub Release. A manual workflow run builds the same matrix and stores its installers as workflow artifacts without publishing a release.

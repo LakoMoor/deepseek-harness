@@ -40,6 +40,6 @@ pnpm run desktop:dist:win
 pnpm run desktop:dist:linux
 ```
 
-产物写入 `apps/desktop/release`。macOS 生成 DMG 与 ZIP，Windows 生成 NSIS 安装包，Linux 生成 AppImage。本地命令构建当前机器的 architecture；仓库 workflow 会分别在原生 runner 上为三个操作系统系列构建 x64 和 ARM64。macOS 开发产物使用有效的 ad-hoc 签名，因此应用可以在本地运行。受信任的公开发布必须在发布环境中用 Developer ID identity 替换已配置的 ad-hoc identity，并完成 notarization。
+产物写入 `apps/desktop/release`。macOS 生成 DMG 与 ZIP，Windows 生成 NSIS 安装包，Linux 生成使用 `deepseek-harness` executable 和 desktop identity 的 AppImage。本地命令构建当前机器的 architecture；仓库 workflow 会分别在原生 runner 上为三个操作系统系列构建 x64 和 ARM64。macOS 开发产物使用有效的 ad-hoc 签名，因此应用可以在本地运行。受信任的公开发布必须在发布环境中用 Developer ID identity 替换已配置的 ad-hoc identity，并完成 notarization。
 
 推送 `desktop-v*` tag 会运行原生构建矩阵，并将所有安装包附加到 GitHub Release。手动运行 workflow 会构建相同矩阵，并把安装包保存为 workflow artifacts，但不会发布 release。
