@@ -29,7 +29,7 @@ importers:
         version: 10.4.1
       '@testing-library/react':
         specifier: ^16.3.2
-        version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@18.3.7(@types/react@19.2.18))(@types/react@18.3.31)(react-dom@18.3.1(react@19.2.3))(react@18.3.1)
+        version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@18.3.7(@types/react@18.3.31))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@types/js-yaml':
         specifier: ^4.0.9
         version: 4.0.9
@@ -42,6 +42,12 @@ importers:
       '@types/node':
         specifier: ^22.20.0
         version: 22.20.0
+      '@types/react':
+        specifier: ^18.3.31
+        version: 18.3.31
+      '@types/react-dom':
+        specifier: ^18.3.7
+        version: 18.3.7(@types/react@18.3.31)
       '@types/spdx-expression-parse':
         specifier: ^4.0.0
         version: 4.0.0
@@ -99,6 +105,12 @@ importers:
       publint:
         specifier: ^0.3.21
         version: 0.3.21
+      react:
+        specifier: 18.3.1
+        version: 18.3.1
+      react-dom:
+        specifier: 18.3.1
+        version: 18.3.1(react@18.3.1)
       smol-toml:
         specifier: ^1.7.1
         version: 1.7.1
@@ -24010,16 +24022,6 @@ snapshots:
       '@types/react': 18.3.31
       '@types/react-dom': 18.3.7(@types/react@18.3.31)
 
-  '@testing-library/react@16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@18.3.7(@types/react@19.2.18))(@types/react@18.3.31)(react-dom@18.3.1(react@19.2.3))(react@18.3.1)':
-    dependencies:
-      '@babel/runtime': 7.29.7
-      '@testing-library/dom': 10.4.1
-      react: 18.3.1
-      react-dom: 18.3.1(react@19.2.3)
-    optionalDependencies:
-      '@types/react': 18.3.31
-      '@types/react-dom': 18.3.7(@types/react@19.2.18)
-
   '@tinyhttp/content-disposition@2.2.4': {}
 
   '@tybys/wasm-util@0.10.2':
@@ -24314,11 +24316,6 @@ snapshots:
   '@types/react-dom@18.3.7(@types/react@18.3.31)':
     dependencies:
       '@types/react': 18.3.31
-
-  '@types/react-dom@18.3.7(@types/react@19.2.18)':
-    dependencies:
-      '@types/react': 19.2.18
-    optional: true
 
   '@types/react-native-fs@2.13.0(react-native@0.87.1(@babel/core@7.29.7)(@react-native-community/cli@20.2.0(typescript@6.0.3))(@react-native/metro-config@0.87.1(@babel/core@7.29.7))(@types/react@19.2.18)(react@19.2.3))':
     dependencies:
@@ -29469,12 +29466,6 @@ snapshots:
     dependencies:
       loose-envify: 1.4.0
       react: 18.3.1
-      scheduler: 0.23.2
-
-  react-dom@18.3.1(react@19.2.3):
-    dependencies:
-      loose-envify: 1.4.0
-      react: 19.2.3
       scheduler: 0.23.2
 
   react-is@16.13.1: {}
