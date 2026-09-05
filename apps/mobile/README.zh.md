@@ -27,4 +27,4 @@ pnpm run mobile:typecheck
 pnpm --filter @deepseek-ai/dsh-mobile test --runInBand
 ```
 
-Android workflow 会为物理 arm64 设备与 x86_64 emulator 构建 debug APK，并将其保存为 workflow artifact。可信的公开发布需要私有 upload key 与 release signing configuration；仓库不会发布共享 signing key。
+Android workflow 会为物理 arm64 设备与 x86_64 emulator 构建 debug APK。推送到 `master` 或手动运行时，APK 会保存为 workflow artifact。推送 `mobile-v*` tag 时，workflow 还会将 APK 发布到版本与 tag 一致的 prerelease。APK 使用仓库的 debug key；可信的 production release 需要私有 upload key 与 release signing configuration。

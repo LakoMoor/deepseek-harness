@@ -650,6 +650,31 @@ describe('npm release workflows', () => {
   })
 })
 
+describe('Mobile release workflow', () => {
+  it('publishes a debug APK only from a mobile version tag', () => {
+    const workflow = loadWorkflow('.github/workflows/mobile-build.yml')
+    const push = workflowEvent(workflow, 'push')
+    const build = workflowJob(workflow, 'build')
+    const release = workflowJob(workflow, 'release')
+    if (!Array.isArray(build.steps) || !Array.isArray(release.steps)) {
+      throw new TypeError('mobile workflow must define build and release steps')
+    }
+    const releaseSteps: unknown[] = release.steps
+
+    expect(push.tags).toEqual(['mobile-v*'])
+    expect(release.if).toBe("startsWith(github.ref, 'refs/tags/mobile-v')")
+    expect(release.needs).toBe('build')
+    expect(release.permissions).toEqual({ contents: 'write' })
+    const publish: unknown = releaseSteps.find(step =>
+      isRecord(step) && step.uses === 'softprops/action-gh-release@v3')
+    if (!isRecord(publish) || !isRecord(publish.with)) {
+      throw new TypeError('mobile release must publish through action-gh-release')
+    }
+    expect(publish.with.prerelease).toBe(true)
+    expect(publish.with.files).toBe('release-assets/*.apk')
+  })
+})
+
 describe('Documentation site publication', () => {
   it('keeps Pages deployment dispatch-only from a dsh-v* tag', () => {
     const workflow = loadWorkflow('.github/workflows/docs-pages.yml')

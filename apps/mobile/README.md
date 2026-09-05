@@ -27,4 +27,4 @@ pnpm run mobile:typecheck
 pnpm --filter @deepseek-ai/dsh-mobile test --runInBand
 ```
 
-The Android workflow builds a debug APK for physical arm64 devices and x86_64 emulators and stores it as a workflow artifact. A trusted public release needs a private upload key and a release signing configuration; the repository does not publish a shared signing key.
+The Android workflow builds a debug APK for physical arm64 devices and x86_64 emulators. A `master` push or manual run stores the APK as a workflow artifact. Pushing a `mobile-v*` tag also publishes the APK in a prerelease whose version matches the tag. The APK uses the repository's debug key; a trusted production release needs a private upload key and a release signing configuration.
